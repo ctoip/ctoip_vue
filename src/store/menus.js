@@ -20,6 +20,14 @@ export default {
                 path: "",
                 children: [
                     {
+                        name: "IpWhois",
+                        title: "IP查询",
+                        icon: "el-icon-minus",
+                        path: "/sys/ipwhois",
+                        component: "sys/IpTrace/IpWhois",
+                        children: [],
+                    },
+                    {
                         name: "DomainQuery",
                         title: "域名查询",
                         icon: "el-icon-minus",
@@ -33,14 +41,6 @@ export default {
                         icon: "el-icon-minus",
                         path: "/sys/assetquery",
                         component: "sys/IpTrace/AssetQuery",
-                        children: [],
-                    },
-                    {
-                        name: "IpWhois",
-                        title: "IP查询",
-                        icon: "el-icon-minus",
-                        path: "/sys/ipwhois",
-                        component: "sys/IpTrace/IpWhois",
                         children: [],
                     },
                 ],

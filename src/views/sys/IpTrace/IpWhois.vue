@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import _Axios from "axios";
 export default {};
 </script>
 
