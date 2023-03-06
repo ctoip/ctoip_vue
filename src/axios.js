@@ -43,9 +43,6 @@ request.interceptors.response.use(
             //权限不足
             router.push("/login")
         }
-        else if (error.response.status === 400) {
-            router.push("/login")
-        }
         Element.Message.error(error.massage, { duration: 3000 })
         return Promise.reject(error)
     }

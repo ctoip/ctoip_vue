@@ -10,6 +10,8 @@
     "axios": "^0.21.1",
     "core-js": "^3.8.3",
     "element-ui": "^2.15.12",
+    "file-saver": "^2.0.5",
+    "json2csv": "5.0.6",
     "mockjs": "^1.1.0",
     "node-sass": "^8.0.0",
     "qs": "^6.11.0",

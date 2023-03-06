@@ -45,6 +45,8 @@ export default {
 .el-main {
   color: #333;
   padding: 0;
+  align-items: center;
+  justify-content: center;
 }
 .el-aside {
   background-color: #d3dce6;
