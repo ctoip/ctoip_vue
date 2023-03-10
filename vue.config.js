@@ -9,8 +9,15 @@ module.exports = defineConfig({
         pathRewrite: {
           '^/api': ''
         }
-      }
+      },
+      '/threatbook': {
+        target: 'https://api.threatbook.cn/v3/', // 要访问的跨域域名
+        changeOrigin: true, // 开启跨域
+        pathRewrite: {
+          '^/threatbook': '' // 将 /api 去掉
+        },
+      },
     },
-  },
+  }
 }
 )

@@ -21,12 +21,12 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column fixed type="selection" width=""> </el-table-column>
-      <el-table-column fixed prop="ip" label="IP" width="150"></el-table-column>
+      <el-table-column fixed prop="ip" label="IP" width="130"></el-table-column>
       <el-table-column prop="area" label="归属地" width="180"></el-table-column>
       <el-table-column
         prop="judgments"
         label="IP信誉"
-        width="120"
+        width="160"
       ></el-table-column>
       <el-table-column
         prop="is_malicious"
@@ -80,6 +80,13 @@ import FileSaver from "file-saver";
 export default {
   methods: {
     getIpInfo() {
+      if (this.input === "") {
+        this.$message({
+          message: "请输入IP地址",
+          type: "warning",
+        });
+        return;
+      }
       this.$axios
         .get("/IpTrace/getIpInfo?ipaddress=" + this.input)
         .then((res) => {

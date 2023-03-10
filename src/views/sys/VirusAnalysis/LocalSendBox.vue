@@ -1,5 +1,5 @@
 <template>
-  <div>静态数据</div>
+  <div>本地沙箱分析</div>
 </template>
 
 <script>

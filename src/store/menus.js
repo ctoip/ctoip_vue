@@ -13,6 +13,39 @@ export default {
         hasRoutes: false,
         menuList: [
             {
+                name: "VirusAnalysis",
+                title: "样本分析",
+                icon: "el-icon-plus",
+                path: "",
+                component: "",
+                children: [
+                    {
+                        name: "FileDetail",
+                        title: "样本详情",
+                        icon: "el-icon-minus",
+                        path: "/filedetail",
+                        component: "sys/VirusAnalysis/FileDetail",
+                        children: [],
+                    },
+                    {
+                        name: "WebSendBox",
+                        title: "云沙箱分析",
+                        icon: "el-icon-minus",
+                        path: "/sys/websendbox",
+                        component: "sys/VirusAnalysis/WebSendBox",
+                        children: [],
+                    },
+                    {
+                        name: "LocalSendBox",
+                        title: "本地沙箱分析",
+                        icon: "el-icon-minus",
+                        path: "/sys/localsendbox",
+                        component: "sys/VirusAnalysis/LocalSendBox",
+                        children: [],
+                    },
+                ],
+            },
+            {
                 name: "IpTrace",
                 title: "IP溯源",
                 icon: "el-icon-plus",
@@ -45,41 +78,6 @@ export default {
                     },
                 ],
             },
-
-            {
-                name: "VirusAnalysis",
-                title: "样本分析",
-                icon: "el-icon-plus",
-                path: "",
-                component: "",
-                children: [
-                    {
-                        name: "WebSendBox",
-                        title: "沙盒分析",
-                        icon: "el-icon-minus",
-                        path: "/sys/websendbox",
-                        component: "sys/VirusAnalysis/WebSendBox",
-                        children: [],
-                    },
-                    {
-                        name: "StaticDataAnalysis",
-                        title: "静态分析",
-                        icon: "el-icon-minus",
-                        path: "/sys/staticdataanalysis",
-                        component: "sys/VirusAnalysis/StaticDataAnalysis",
-                        children: [],
-                    },
-                    {
-                        name: "FileDetail",
-                        title: "样本详情",
-                        icon: "el-icon-minus",
-                        path: "/filedetail",
-                        component: "sys/VirusAnalysis/FileDetail",
-                        children: [],
-                    },
-                ],
-            },
-
             {
                 name: "TraceabilityReport",
                 title: "溯源报告",
