@@ -1,5 +1,5 @@
 <template>
-  <div>UrlCode转码</div>
+  <div>生成溯源报告</div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div>IP图</div>
+  <div>GPT问答</div>
 </template>
 
 <script>
