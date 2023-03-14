@@ -17,31 +17,23 @@
     <el-table
       :data="tableData"
       border
-      style="width: 100%"
+      style="width: 100%; margin: auto"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column fixed type="selection" width=""> </el-table-column>
+      <el-table-column fixed type="selection" width="50"> </el-table-column>
       <el-table-column fixed prop="ip" label="IP" width="130"></el-table-column>
       <el-table-column prop="area" label="归属地" width="180"></el-table-column>
       <el-table-column
         prop="judgments"
         label="IP信誉"
-        width="160"
+        width="500"
       ></el-table-column>
       <el-table-column
         prop="is_malicious"
         label="是否为恶意IP"
         width="120"
       ></el-table-column>
-      <el-table-column
-        prop="asn.orgName"
-        label="ASN名称"
-        width="300"
-      ></el-table-column>
-      <el-table-column prop="asn.orgId" label="ASNID" width="100">
-      </el-table-column>
-      <el-table-column prop="asn.address" label="ASN地址" width="200">
-      </el-table-column>
+      <el-table-column prop="asn" label="ASN名称" width="200"></el-table-column>
       <el-table-column
         fixed="right"
         prop="update_time"
@@ -60,7 +52,11 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog title="JSON数据" :visible.sync="dialogVisible">
+    <el-dialog
+      title="JSON数据"
+      :visible.sync="dialogVisible"
+      v-loading="checkIpInfoloading"
+    >
       <pre
         style="
           white-space: pre-wrap;
@@ -105,11 +101,7 @@ export default {
           const newData = {
             ip: item.ip,
             area: item.area,
-            asn: {
-              orgName: item.asn.orgName,
-              orgId: item.asn.orgId,
-              address: item.asn.address,
-            },
+            asn: item.asn,
             judgments: item.judgments.join(" "),
             is_malicious: item.is_malicious,
             update_time: item.update_time,
@@ -144,9 +136,12 @@ export default {
       }
     },
     checkIpInfo(ip) {
+      this.checkIpInfoloading = true;
+      this.dialogVisible = true;
       _Axios.get("https://ipapi.co/" + ip + "/json/").then((res) => {
         const data = JSON.parse(JSON.stringify(res.data));
-        (this.dialogVisible = true), (this.jsonMoreIpData = data);
+        this.jsonMoreIpData = data;
+        this.checkIpInfoloading = false;
       });
     },
     handleSelectionChange(val) {
@@ -162,13 +157,20 @@ export default {
         //转化为JSON对象数组,而不是字符串
         const selectedData = JSON.parse(JSON.stringify(this.multipleSelection));
         // 定义要导出的字段
-        const fields = ["ip", "is_malicious", "update_time"];
+        const fields = [
+          "ip",
+          "area",
+          "asn",
+          "judgments",
+          "is_malicious",
+          "update_time",
+        ];
         // 将数据转换为CSV格式
         const csv = json2csv.parse(selectedData, { fields });
         // 创建Blob对象
         const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
         // 保存CSV文件
-        FileSaver.saveAs(blob, "selectedData.csv");
+        FileSaver.saveAs(blob, "selectedIPData.csv");
         this.$message({
           message: "导出成功",
           type: "success",
@@ -186,6 +188,7 @@ export default {
       input: "",
       tableData: [],
       multipleSelection: [],
+      checkIpInfoloading: false,
     };
   },
 };
