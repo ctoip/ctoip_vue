@@ -2,7 +2,34 @@
   <div>
     <el-button type="text" @click="getFileAnalysis">刷新数据</el-button>
     <el-collapse accordion @change="getData" v-model="activeNames">
-      <el-collapse-item title="文件行为 Signatrue" name="signatrue">
+      <el-collapse-item name="signatrue">
+        <template slot="title">
+          <h3>文件行为 Signatrue</h3>
+        </template>
+        <!--  -->
+        <el-collapse v-for="a in this.Signatrue">
+          <el-collapse-item>
+            <template slot="title">
+              <h5>{{ a.label }}</h5>
+            </template>
+            <pre
+              style="
+                white-space: pre-wrap;
+                background-color: #f8f8f8;
+                padding: 10px;
+                border-radius: 5px;
+              "
+            >
+            {{ a.context }}</pre
+            >
+          </el-collapse-item>
+        </el-collapse>
+        <!--  -->
+      </el-collapse-item>
+      <el-collapse-item name="dropped">
+        <template slot="title">
+          <h3>释放文件 Dropped</h3>
+        </template>
         <pre
           style="
             white-space: pre-wrap;
@@ -10,9 +37,13 @@
             padding: 10px;
             border-radius: 5px;
           "
-        ><el-tree :data="data" :props="defaultProps" default-expand-all></el-tree></pre>
+          >{{ this.Dropped }}</pre
+        >
       </el-collapse-item>
-      <el-collapse-item title="释放文件 Dropped" name="dropped">
+      <el-collapse-item name="network">
+        <template slot="title">
+          <h3>网络 Network</h3>
+        </template>
         <pre
           style="
             white-space: pre-wrap;
@@ -20,19 +51,13 @@
             padding: 10px;
             border-radius: 5px;
           "
-        ><el-tree :data="data" :props="defaultProps" default-expand-all></el-tree></pre>
+          >{{ this.Network }}</pre
+        >
       </el-collapse-item>
-      <el-collapse-item title="网络 Network" name="network">
-        <pre
-          style="
-            white-space: pre-wrap;
-            background-color: #f8f8f8;
-            padding: 10px;
-            border-radius: 5px;
-          "
-        ><el-tree :data="data" :props="defaultProps" default-expand-all></el-tree></pre>
-      </el-collapse-item>
-      <el-collapse-item title="进程信息 Pstree" name="pstree">
+      <el-collapse-item name="pstree">
+        <template slot="title">
+          <h3>进程信息 Pstree</h3>
+        </template>
         <pre
           style="
             white-space: pre-wrap;
@@ -43,7 +68,10 @@
           >{{ this.pstree }}</pre
         >
       </el-collapse-item>
-      <el-collapse-item title="静态字符串 Strings" name="strings">
+      <el-collapse-item name="strings">
+        <template slot="title">
+          <h3>静态字符串 Strings</h3>
+        </template>
         <pre
           style="
             white-space: pre-wrap;
@@ -60,7 +88,6 @@
 
 <script>
 import _Axios from "axios";
-import qs from "qs";
 export default {
   data() {
     return {
@@ -72,6 +99,9 @@ export default {
         children: "children",
         label: "label",
       },
+      Signatrue: [],
+      Network: "",
+      Dropped: "",
     };
   },
   computed: {
@@ -94,45 +124,19 @@ export default {
       this.data = [];
       if (this.activeNames === "signatrue") {
         var arrays = [];
+        this.Signatrue = [];
         arrays = this.FileAnalysis.signature;
         for (var i = 0; i < arrays.length; i++) {
-          this.data.push({
-            label: i + 1 + " " + JSON.parse(arrays[i].description).cn,
-          });
+          const newData = {
+            label: JSON.parse(arrays[i].description).cn,
+            context: JSON.stringify(arrays[i].marks),
+          };
+          this.Signatrue = [newData, ...this.Signatrue];
         }
       } else if (this.activeNames === "dropped") {
-        var arrays = [];
-        arrays = this.FileAnalysis.dropped;
-        for (var i = 0; i < arrays.length; i++) {
-          this.data.push({
-            label: arrays[i].filepath,
-            children: [
-              {
-                label: "威胁等级: " + arrays[i].threat_level,
-              },
-              {
-                label: "sha256: " + arrays[i].sha256,
-              },
-              {
-                label: "运行环境: " + arrays[i].type,
-              },
-            ],
-          });
-        }
+        this.Dropped = this.FileAnalysis.dropped;
       } else if (this.activeNames === "network") {
-        var obj = this.FileAnalysis.network;
-        for (let key in obj) {
-          if (this.FileAnalysis.network[key].length !== 0) {
-            let i = 1;
-            for (let a in obj[key]) {
-              this.data.push({
-                label: key,
-                children: [{ label: JSON.stringify(obj[key][a]) }],
-              });
-              i++;
-            }
-          }
-        }
+        this.Network = this.FileAnalysis.network;
       } else if (this.activeNames === "pstree") {
         this.pstree = this.FileAnalysis.pstree;
       } else if (this.activeNames === "strings") {
@@ -167,4 +171,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.el-tree-node__content {
+  width: 200px;
+}
+
+.el-tree-node__label {
+  word-break: break-all;
+}
+</style>

@@ -26,7 +26,7 @@
       <el-table-column
         prop="judgments"
         label="IP信誉"
-        width="500"
+        width="400"
       ></el-table-column>
       <el-table-column
         prop="is_malicious"
