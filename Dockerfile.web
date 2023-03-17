@@ -11,8 +11,9 @@ RUN apt-get update \
     && wget -O dist.tar.gz  https://github.com/Dew-OF-Aurora/ctoip_vue/releases/download/dist/dist.tar.gz \
     && tar -xzvf dist.tar.gz \
     && cd ${NGINXPATH} \
-    && mv nginx.conf nginx.conf.bak
-    && wget -O nginx.conf https://github.com/Dew-OF-Aurora/ctoip_vue/releases/download/dist/nginx.conf
+    && mv nginx.conf nginx.conf.bak \
+    && wget -O tmpnginx.conf https://github.com/Dew-OF-Aurora/ctoip_vue/releases/download/dist/nginx.conf \
+    && envsubst < tmpnginx.conf > nginx.conf
 
 EXPOSE 80
 
