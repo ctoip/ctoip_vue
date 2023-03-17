@@ -18,8 +18,9 @@ module.exports = defineConfig({
         },
       },
     },
-  }
-
+  },
+  publicPath: './',
+  lintOnSave: false
 }
 
 )
