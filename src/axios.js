@@ -43,6 +43,14 @@ request.interceptors.response.use(
             //权限不足
             router.push("/login")
         }
+        if (error.response.status === 500) {
+            error.massage = "500 (Internal Server Error)"
+            //后端未运行
+            router.push("/login")
+        }
+        else {
+            error.massage = "未知错误"
+        }
         Element.Message.error(error.massage, { duration: 3000 })
         return Promise.reject(error)
     }
