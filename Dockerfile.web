@@ -1,0 +1,11 @@
+From nginx:1.22.1
+MAINTAINER Aurora
+
+ENV MYPATH /usr/share/nginx/html/
+WORKDIR $MYPATH
+
+RUN apt update \
+    && apt install wget \
+    && cd ${MYPATH} \
+    && wget -O dist.tar.gz  https://github.com/Dew-OF-Aurora/ctoip_vue/releases/download/dist/dist.tar.gz \
+    && tar -xzvf dist.tar.gz \
