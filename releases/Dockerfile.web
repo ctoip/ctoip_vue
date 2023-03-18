@@ -10,6 +10,9 @@ RUN sed -i "s@http://deb.debian.org@https://mirrors.163.com@g" /etc/apt/sources.
     && apt-get install --no-install-recommends --no-install-suggests -y wget \
     && cd ${HTMLPATH} \
     && wget -O dist.tar.gz  https://github.com/Dew-OF-Aurora/ctoip_vue/releases/download/dist/dist.tar.gz \
+    && mkdir dist \
+    && mv dist.tar.gz dist \
+    && cd dist \
     && tar -xzvf dist.tar.gz \
     && cd ${NGINXPATH} \
     && mv nginx.conf nginx.conf.bak \
