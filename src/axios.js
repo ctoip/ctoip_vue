@@ -43,8 +43,8 @@ request.interceptors.response.use(
             //权限不足
             router.push("/login")
         }
-        if (error.response.status === 500) {
-            error.massage = "500 (Internal Server Error)"
+        if (error.response.status === 500 || error.response.status === 502 || error.response.status === 503) {
+            error.massage = "后端错误,请检查后端"
             //后端未运行
             router.push("/login")
         }

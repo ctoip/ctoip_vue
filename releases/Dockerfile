@@ -17,5 +17,4 @@ RUN sed -i "s@http://deb.debian.org@https://mirrors.163.com@g" /etc/apt/sources.
     && envsubst '${HTMLPATH}' < tmpnginx.conf > nginx.conf
 
 EXPOSE 80
-
 CMD ["nginx", "-g", "daemon off;"]
