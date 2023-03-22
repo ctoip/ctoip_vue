@@ -24,7 +24,6 @@
               v-model="loginForm.code"
               style="width: 172px; float: left"
               maxlength="5"
-              @focus="getCaptchaImg()"
             ></el-input>
             <el-image
               :src="captchaImg"
