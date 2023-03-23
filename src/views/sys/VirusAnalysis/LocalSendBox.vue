@@ -1,5 +1,5 @@
 <template>
-  <div>本地沙箱分析</div>
+  <div>本地沙箱分析(未上线)</div>
 </template>
 
 <script>

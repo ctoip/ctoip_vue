@@ -1,5 +1,5 @@
 <template>
-  <div>资产查询</div>
+  <div>资产查询(未上线)</div>
 </template>
 
 <script>
