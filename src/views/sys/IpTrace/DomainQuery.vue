@@ -111,7 +111,9 @@ export default {
       this.multipleSelection = val;
     },
     getDomainInfo() {
-      if (this.input === "") {
+      const reg =
+        /[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+.?/;
+      if (!reg.test(this.input)) {
         this.$message({
           message: "请输入域名",
           type: "warning",
