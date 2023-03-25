@@ -26,9 +26,9 @@
     </table>
 
     <el-descriptions class="margin-top" title="文件总览" :column="3" border>
-      <template slot="extra">
+      <!-- <template slot="extra">
         <el-button type="text" size="small">导出CSV</el-button>
-      </template>
+      </template> -->
       <el-descriptions-item>
         <template slot="label">文件名</template>
         {{ fileSummary.file_name }}

@@ -26,7 +26,7 @@
 import usercenter from "@/components/UserCenter.vue";
 export default {
   components: { usercenter },
-  created() {
+  mounted() {
     this.getUserInfo();
   },
   data() {
@@ -59,10 +59,15 @@ export default {
       });
     },
     getUserInfo() {
-      this.$axios.get("/sys-user/userInfo").then((res) => {
-        this.userInfo = res.data.data;
-        this.$store.commit("SET_USERNAME", res.data.data.username);
-      });
+      this.$axios
+        .get("/sys-user/userInfo")
+        .then((res) => {
+          this.userInfo = res.data.data;
+          this.$store.commit("SET_USERNAME", res.data.data.username);
+        })
+        .catch((error) => {
+          this.$message.error(error);
+        });
     },
     logout() {
       this.$axios.get("/logout").then((res) => {

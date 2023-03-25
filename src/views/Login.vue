@@ -91,6 +91,7 @@ export default {
               this.$store.commit("SET_TOKEN", jwt);
               this.$store.commit("SET_USERNAME", res.data.data);
               this.$router.push("/index");
+              this.$axios.post("/sys-user/updateInfoLoginTime", res.data.data);
             });
         } else {
           console.log("error submit!!");
@@ -103,7 +104,7 @@ export default {
       this.$refs[formName].resetFields();
     },
   },
-  created() {
+  mounted() {
     this.getCaptchaImg();
   },
 };
