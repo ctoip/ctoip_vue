@@ -1,6 +1,8 @@
 <template>
   <div>
-    <el-button type="text" @click="getFileAnalysis">刷新数据</el-button>
+    <el-button type="primary" @click="getFileAnalysis" style="width: 100%"
+      >刷新数据</el-button
+    >
     <el-collapse accordion @change="getData" v-model="activeNames">
       <el-collapse-item name="signatrue">
         <template slot="title">
@@ -146,7 +148,7 @@ export default {
     getFileAnalysis() {
       if (this.sha256 !== null) {
         this.getFromApi();
-        this.$message.success("以从云端取出数据");
+        this.$message.success("取出数据");
         //只有sha265
       } else {
         //什么有没有
@@ -167,6 +169,9 @@ export default {
           sessionStorage.setItem("FileAnalysis", JSON.stringify(res.data.data));
         });
     },
+  },
+  mounted() {
+    this.getFileAnalysis();
   },
 };
 </script>

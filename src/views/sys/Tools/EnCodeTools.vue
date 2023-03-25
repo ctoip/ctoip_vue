@@ -113,6 +113,7 @@ export default {
         const encoder = new TextEncoder();
         //unicode编码成UTF-8字节数组, utf-8能被ascii编码
         var data = encoder.encode(this.BaseInput);
+        //binary to ascii
         this.BaseOutput = btoa(String.fromCharCode(...data));
       } else if (this.BaseOptionsSelectedValue === "32") {
         this.BaseOutput = base32j.encode(this.BaseInput);
@@ -129,10 +130,10 @@ export default {
         const data = atob(this.BaseOutput);
         const bytes = new Uint8Array(data.length);
         for (let i = 0; i < data.length; i++) {
-          //转化为Utf-8
+          //转化为Utf-8的二进制数组
           bytes[i] = data.charCodeAt(i);
         }
-        //转化为unicode
+        //解码Base64
         this.BaseInput = decoder.decode(bytes);
       } else if (this.BaseOptionsSelectedValue === "32") {
         this.BaseInput = base32j.decode(this.BaseOutput);
