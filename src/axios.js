@@ -1,11 +1,13 @@
 import axios from "axios";
 import router from "./router";
 import Element from "element-ui"
+import store from './store';
+import cookies from "axios/lib/helpers/cookies.js";
 
 //axios.defaults.baseURL = "http://localhost:8081"
 
 const request = axios.create({
-    // timeout: 5000,
+    timeout: 1000 * 60,
     baseURL: "/api",
     headers: {
         'Content-Type': "application/json; charset=utf-8"
@@ -15,6 +17,7 @@ const request = axios.create({
 //登录完成后的请求携带jwt的token
 request.interceptors.request.use(config => {
     config.headers['Authorization'] = localStorage.getItem("token")
+    config.headers['setHeaderName'] = cookies.read("setCookieName") + "233"
     return config
 }, error => {
     return Promise.reject(error);
@@ -40,16 +43,18 @@ request.interceptors.response.use(
             error.massage = error.response.data.msg
         }
         if (error.response.status === 401) {
+            error.massage = "无权操作:401"
             //权限不足
             router.push("/login")
         }
+        if (error.response.status === 404) {
+            error.massage = "无法访问资源:404"
+        }
         if (error.response.status === 500 || error.response.status === 502 || error.response.status === 503) {
-            error.massage = "后端错误,请检查后端"
-            //后端未运行
-            router.push("/login")
+            error.massage = "后端错误，请检查输入" + error.response.status + ", " + error.response.massage
         }
         else {
-            error.massage = "未知错误"
+            error.massage = "未知错误：" + error.response.status + " " + error.response.code
         }
         Element.Message.error(error.massage, { duration: 3000 })
         return Promise.reject(error)
