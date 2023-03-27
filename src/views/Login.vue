@@ -87,8 +87,7 @@ export default {
             //axios将JavaScript对象序列化为JSON。 要以application / x-www-form-urlencoded格式发送数据
             .post("/login?" + qs.stringify(this.loginForm))
             .then((res) => {
-              const jwt = res.headers["authorization"];
-              this.$store.commit("SET_TOKEN", jwt);
+              this.$store.commit("SET_TOKEN", res.headers["authorization"]);
               this.$store.commit("SET_USERNAME", res.data.data);
               this.$router.push("/index");
               this.$axios.post("/sys-user/updateInfoLoginTime", res.data.data);

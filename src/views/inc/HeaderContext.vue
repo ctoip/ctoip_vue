@@ -60,7 +60,7 @@ export default {
     },
     getUserInfo() {
       this.$axios
-        .get("/sys-user/userInfo")
+        .post("/sys-user/userInfo")
         .then((res) => {
           this.userInfo = res.data.data;
           this.$store.commit("SET_USERNAME", res.data.data.username);
@@ -70,7 +70,7 @@ export default {
         });
     },
     logout() {
-      this.$axios.get("/logout").then((res) => {
+      this.$axios.post("/logout").then((res) => {
         localStorage.clear();
         sessionStorage.clear();
         this.$store.commit("resetState");
