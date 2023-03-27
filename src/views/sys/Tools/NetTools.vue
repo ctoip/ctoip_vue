@@ -50,6 +50,9 @@ export default {
         .then((res) => {
           this.nmapResult = JSON.parse(res.data.data);
           this.nmapStatus = false;
+        })
+        .catch((err) => {
+          this.nmapStatus = false;
         });
     },
   },
