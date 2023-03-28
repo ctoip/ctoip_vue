@@ -11,10 +11,10 @@ export default new Vuex.Store({
     username: '',
     token: '',
   },
-  //这里是get方法,并且每次打开浏览器优先执行该方法，获取所有的状态
+  //get方法,并且每次打开浏览器优先执行该方法，获取所有的状态
   getters: {
   },
-  //这里是set方法
+  //set方法
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
@@ -32,7 +32,7 @@ export default new Vuex.Store({
 
   },
 
-  //这里是我自己理解的是为了给全局变量分组，所以需要写提前声明其他store文件，然后引入这里
+  //给全局变量分组，所以需要写提前声明其他store文件，然后引入这里
   modules: {
     menus
   }
