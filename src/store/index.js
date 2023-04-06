@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     username: '',
     token: '',
+    threatbookApi: '5ea5eb7c777e432997a42a7dda717c2a1402def6763540f6b6a39a35f010b02a',
   },
   //get方法,并且每次打开浏览器优先执行该方法，获取所有的状态
   getters: {

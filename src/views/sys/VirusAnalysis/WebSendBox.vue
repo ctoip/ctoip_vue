@@ -104,6 +104,7 @@ export default {
       Signatrue: [],
       Network: "",
       Dropped: "",
+      threatbookApi: this.$store.state.threatbookApi,
     };
   },
   computed: {
@@ -159,8 +160,7 @@ export default {
       _Axios
         .get("/threatbook/file/report", {
           params: {
-            apikey:
-              "5ea5eb7c777e432997a42a7dda717c2a1402def6763540f6b6a39a35f010b02a",
+            apikey: this.threatbookApi,
             sha256: this.sha256,
             query_fields: "signature,dropped,network,pstree,strings",
           },
