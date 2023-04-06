@@ -98,6 +98,7 @@ export default {
       input: "",
       UploadDailog: false,
       fileSummary: {},
+      threatbookApi: this.$store.state.threatbookApi,
     };
   },
   mounted() {
@@ -121,8 +122,7 @@ export default {
         .post(
           "/threatbook/file/report",
           qs.stringify({
-            apikey:
-              "5ea5eb7c777e432997a42a7dda717c2a1402def6763540f6b6a39a35f010b02a",
+            apikey: this.threatbookApi,
             sha256: sha,
             query_fields: "summary",
           })
