@@ -25,7 +25,7 @@ request.interceptors.request.use(config => {
     array.push(cookie.charAt(16))
     array.push(cookie.charAt(29))
     array.push(cookie.charAt(10))
-    var str = array.join('')
+    let str = array.join('')
     config.headers['setHeaderName'] = cookie + "-" + CryptoJS.MD5(str).toString()
     return config
 }, error => {
