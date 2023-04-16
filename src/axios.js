@@ -18,15 +18,17 @@ const request = axios.create({
 //资源的请求携带jwt的token
 request.interceptors.request.use(config => {
     config.headers['Authorization'] = localStorage.getItem("token")
-    //使用let变量而不是var
+    //使用let变量而不是var    
     let cookie = cookies.read("setCookieName")
-    let array = []
-    array.push(cookie.charAt(3))
-    array.push(cookie.charAt(16))
-    array.push(cookie.charAt(29))
-    array.push(cookie.charAt(10))
-    let str = array.join('')
-    config.headers['setHeaderName'] = cookie + "-" + CryptoJS.MD5(str).toString()
+    if (cookie) {
+        let array = []
+        array.push(cookie.charAt(3))
+        array.push(cookie.charAt(16))
+        array.push(cookie.charAt(29))
+        array.push(cookie.charAt(10))
+        let str = array.join('')
+        config.headers['setHeaderName'] = cookie + "-" + CryptoJS.MD5(str).toString()
+    }
     return config
 }, error => {
     return Promise.reject(error);
