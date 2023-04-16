@@ -3,6 +3,7 @@ import router from "./router";
 import Element from "element-ui"
 import store from './store';
 import cookies from "axios/lib/helpers/cookies.js";
+import CryptoJS from 'crypto-js';
 
 //axios.defaults.baseURL = "http://localhost:8081"
 
@@ -14,10 +15,17 @@ const request = axios.create({
     }
 })
 
-//登录完成后的请求携带jwt的token
+//资源的请求携带jwt的token
 request.interceptors.request.use(config => {
     config.headers['Authorization'] = localStorage.getItem("token")
-    config.headers['setHeaderName'] = cookies.read("setCookieName") + "233"
+    var cookie = cookies.read("setCookieName")
+    var array = []
+    array.push(cookie.charAt(3))
+    array.push(cookie.charAt(16))
+    array.push(cookie.charAt(29))
+    array.push(cookie.charAt(10))
+    var str = array.join('')
+    config.headers['setHeaderName'] = cookie + "-" + CryptoJS.MD5(str).toString()
     return config
 }, error => {
     return Promise.reject(error);
@@ -26,7 +34,7 @@ request.interceptors.request.use(config => {
 //响应拦截处理Http状态码,弹窗
 request.interceptors.response.use(
     response => {
-        // console.log("response ->" + response)
+        //console.log("response ->" + response)
         let res = response.data
 
         if (res.code === 200) {

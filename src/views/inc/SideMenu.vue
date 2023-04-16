@@ -58,6 +58,7 @@ export default {
     },
   },
   methods: {
+    //当点击侧边菜单，添加到TabBar的列表中
     selectMenu(item) {
       this.$store.commit("addTab", item);
     },
