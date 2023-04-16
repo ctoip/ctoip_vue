@@ -34,6 +34,7 @@ const routes = [
 
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
+  //重写push，出错不报错
   return originalPush.call(this, location).catch(err => err)
 }
 
@@ -77,6 +78,7 @@ router.beforeEach((to, from, next) => {
     })
     next({ path: to.path })
   }
+  //已经存在路由，已经存在token
   next()
 })
 
