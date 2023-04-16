@@ -5,7 +5,9 @@ Vue.use(Vuex)
 
 export default {
     state: {
+        //当前活动bar值
         editableTabsValue: 'Index',
+        //活动的bar数组
         editableTabs: [{
             title: '首页',
             name: 'Index',
@@ -135,7 +137,7 @@ export default {
         },
         addTab(state, tab) {
             let index = state.editableTabs.findIndex(e => e.name === tab.name)
-
+            //查看该选项是否存在，如果不存在则创建bar
             if (index === -1) {
                 state.editableTabs.push({
                     title: tab.title,
