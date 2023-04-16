@@ -28,6 +28,7 @@ export default {
         return this.$store.state.menus.editableTabs;
       },
       set(val) {
+        //添加动态bar
         this.$store.state.menus.editableTabs = val;
       },
     },
@@ -41,6 +42,7 @@ export default {
     },
   },
   methods: {
+    //移除,官方文档
     removeTab(targetName) {
       let tabs = this.editableTabs;
       let activeName = this.editableTabsValue;
@@ -48,7 +50,7 @@ export default {
       if (activeName === "Index") {
         return;
       }
-
+      //
       if (activeName === targetName) {
         tabs.forEach((tab, index) => {
           if (tab.name === targetName) {
@@ -60,10 +62,11 @@ export default {
         });
       }
       this.editableTabsValue = activeName;
+      //同步vuex，过滤掉需要删除的bar项目
       this.editableTabs = tabs.filter((tab) => tab.name !== targetName);
-
       this.$router.push({ name: activeName });
     },
+    //转到该页面
     clickTab(target) {
       this.$router.push({ name: target.name });
     },
