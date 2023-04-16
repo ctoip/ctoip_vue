@@ -18,8 +18,9 @@ const request = axios.create({
 //资源的请求携带jwt的token
 request.interceptors.request.use(config => {
     config.headers['Authorization'] = localStorage.getItem("token")
-    var cookie = cookies.read("setCookieName")
-    var array = []
+    //使用let变量而不是var
+    let cookie = cookies.read("setCookieName")
+    let array = []
     array.push(cookie.charAt(3))
     array.push(cookie.charAt(16))
     array.push(cookie.charAt(29))
