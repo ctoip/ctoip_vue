@@ -14,8 +14,8 @@
           <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <el-link href="https://github.com/Dew-OF-Aurora/ctoip" target="_blank"
-        >网站</el-link
+      <el-link href="https://github.com/ctoip" target="_blank"
+        >View in GitHub</el-link
       >
     </div>
     <usercenter v-if="Visiable" ref="usercenterdialog"></usercenter>
