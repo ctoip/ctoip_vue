@@ -28,6 +28,7 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitInfo()">确 定</el-button>
         <el-button @click="usercenterdialogVisible = false">取 消</el-button>
         <el-tooltip
           class="item"
@@ -35,7 +36,6 @@
           content="需要重新登入"
           placement="top"
         >
-          <el-button type="primary" @click="submitInfo()">确 定</el-button>
         </el-tooltip>
       </span>
     </el-dialog>
@@ -91,5 +91,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped></style>
