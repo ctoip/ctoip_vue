@@ -29,6 +29,7 @@ request.interceptors.request.use(config => {
         let str = array.join('')
         config.headers['setHeaderName'] = cookie + "-" + CryptoJS.MD5(str).toString()
     }
+    config.headers['X-XSRF-TOKEN'] = cookies.read("XSRF-TOKEN")
     return config
 }, error => {
     return Promise.reject(error);
