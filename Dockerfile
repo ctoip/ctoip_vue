@@ -1,4 +1,4 @@
-FROM node:16-bullseye AS builder
+FROM --platform=$BUILDPLATFORM node:16-bullseye AS builder
 
 WORKDIR /workspace
 COPY package*.json ./
