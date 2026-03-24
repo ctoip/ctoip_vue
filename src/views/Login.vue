@@ -84,7 +84,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios
-            //axios将JavaScript对象序列化为JSON。 要以application / x-www-form-urlencoded格式发送数据
+            //axios将使用application/json; charset=utf-8, 此处要以application/x-www-form-urlencoded格式发送数据
             .post("/login?" + qs.stringify(this.loginForm))
             .then((res) => {
               this.$store.commit("SET_TOKEN", res.headers["authorization"]);
